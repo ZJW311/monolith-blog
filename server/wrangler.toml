@@ -5,24 +5,25 @@ compatibility_date = "2024-12-30"
 compatibility_flags = ["nodejs_compat"]
 
 [vars]
-# 非敏感配置变量（敏感的用 wrangler secret put）
 BLOG_NAME = "Monolith"
-# 对外公开域名（用于 sitemap.xml / robots.txt 的绝对 URL）
-SITE_ORIGIN = "https://monolith-blog.pages.dev"
-# 运行时默认不做建表/补列；部署流程负责迁移与 schema reconcile。
-AUTO_SCHEMA_MIGRATION = "false"
-# AE GraphQL 查询所需的账户 ID（非敏感；查询令牌走 CLOUDFLARE_API_TOKEN secret）
+# 改成你真实的Pages地址
+SITE_ORIGIN = "https://monolith-blog-bpw.pages.dev"
+AUTO_SCHEMA_MIGRATION = "true"
 CLOUDFLARE_ACCOUNT_ID = "38a3abc42da744bac9e51c6fa6035fb4"
+# 前端跨域放行，和上面地址保持一致
+CORS_ALLOW_ORIGIN = "https://monolith-blog-bpw.pages.dev"
+# 后台登录密码，这里改成你自己想要的密码！
+ADMIN_PASSWORD = "Zjw520125vv"
 
-# D1 数据库绑定
+# D1数据库绑定
 [[d1_databases]]
 binding = "DB"
-database_name = "monolith-blog-db"
-database_id = "e1f4e1c8-3b60-4fb5-a325-fdb4aeac896d"
+database_name = "monolith_blog_db"
+database_id = "3ce5768d-56ac-4989-83b6-4b5b3e1388e4"
 migrations_dir = "src/migrations"
 
-# R2 存储桶绑定
+# R2存储桶绑定 
 [[r2_buckets]]
-binding = "BUCKET"
+binding = "R2"
 bucket_name = "monolith-blog-img"
 
