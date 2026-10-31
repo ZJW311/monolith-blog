@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="zh-CN" class="dark h-full antialiased">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="description" content="书写代码、设计与边缘计算的个人博客。在秩序与混沌的交界处，寻找属于自己的巨石碑。" />
+    <meta name="theme-color" content="#0d1117" />
+
+    <!-- Open Graph 默认标签（SPA 首次抓取时的兜底） -->
+    <meta property="og:title" content="Monolith — 代码、设计与边缘计算" />
+    <meta property="og:description" content="书写代码、设计与边缘计算的个人博客。在秩序与混沌的交界处，寻找属于自己的巨石碑。" />
+    <meta property="og:type" content="website" />
+    <meta property="og:site_name" content="Monolith" />
+    <meta property="og:locale" content="zh_CN" />
+    <meta property="og:image" content="/og-default.png" />
+
+    <!-- Twitter Card 默认标签 -->
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="Monolith — 代码、设计与边缘计算" />
+    <meta name="twitter:description" content="书写代码、设计与边缘计算的个人博客。" />
+    <meta name="twitter:image" content="/og-default.png" />
+
+    <title>Monolith — 代码、设计与边缘计算</title>
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <link rel="alternate" type="application/rss+xml" title="Monolith RSS" href="/rss.xml" />
+  </head>
+  <body class="min-h-full flex flex-col font-sans bg-background text-foreground">
+    <!-- 主题初始化：在 React 加载前设置 data-theme / data-style，防止闪烁 -->
+    <script>
+      (function(){
+        // 全站主题由控制台「站点配置 → 主题外观」决定；cookie 为首屏同步缓存，
+        // 首次访问在公共设置加载前按默认暗色渲染，设置加载后立即校正并写入缓存。
+        var mode = 'dark', style = 'default';
+        var m = document.cookie.match(/(?:^|;\s*)monolith_site_theme=([^;]+)/);
+        if (m) {
+          try {
+            var parts = decodeURIComponent(m[1]).split('|');
+            if (['dark','light','system'].indexOf(parts[0]) >= 0) mode = parts[0];
+            if (['default','fluid'].indexOf(parts[1]) >= 0) style = parts[1];
+          } catch (e) {}
+        }
+        var d = mode === 'system'
+          ? (window.matchMedia('(prefers-color-scheme:dark)').matches ? 'dark' : 'light')
+          : mode;
+        document.documentElement.setAttribute('data-theme', d);
+        document.documentElement.setAttribute('data-style', style);
+        // 同步 theme-color
+        var mc = document.querySelector('meta[name="theme-color"]');
+        if (mc) {
+          mc.setAttribute('content', style === 'fluid'
+            ? (d === 'light' ? '#f6f4fb' : '#0d0b1a')
+            : (d === 'light' ? '#ffffff' : '#0d1117'));
+        }
+        // 清理旧版访客本地主题偏好（主题已改为控制台全站设置）
+        try {
+          localStorage.removeItem('theme');
+          localStorage.removeItem('monolith-theme-style');
+        } catch (e) {}
+      })();
+    </script>
+    <div id="root" class="min-h-screen flex flex-col"></div>
+    <script type="module" src="/src/main.tsx"></script>
+  </body>
+</html>

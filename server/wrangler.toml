@@ -1,0 +1,28 @@
+name = "monolith-blog"
+main = "src/index.ts"
+account_id = "38a3abc42da744bac9e51c6fa6035fb4"
+compatibility_date = "2024-12-30"
+compatibility_flags = ["nodejs_compat"]
+
+[vars]
+# 非敏感配置变量（敏感的用 wrangler secret put）
+BLOG_NAME = "Monolith"
+# 对外公开域名（用于 sitemap.xml / robots.txt 的绝对 URL）
+SITE_ORIGIN = "https://monolith-blog.pages.dev"
+# 运行时默认不做建表/补列；部署流程负责迁移与 schema reconcile。
+AUTO_SCHEMA_MIGRATION = "false"
+# AE GraphQL 查询所需的账户 ID（非敏感；查询令牌走 CLOUDFLARE_API_TOKEN secret）
+CLOUDFLARE_ACCOUNT_ID = "38a3abc42da744bac9e51c6fa6035fb4"
+
+# D1 数据库绑定
+[[d1_databases]]
+binding = "DB"
+database_name = "monolith-blog-db"
+database_id = "e1f4e1c8-3b60-4fb5-a325-fdb4aeac896d"
+migrations_dir = "src/migrations"
+
+# R2 存储桶绑定
+[[r2_buckets]]
+binding = "BUCKET"
+bucket_name = "monolith-blog-img"
+
