@@ -1,5 +1,12 @@
 # Changelog
 
+## [2.8.1](https://github.com/ZJW311/monolith-blog/compare/v2.8.0...v2.8.1) (2026-10-31)
+
+
+### 🐛 Bug Fixes
+
+* 硬编码worker后端地址，修复登录405问题 ([3f33ae1](https://github.com/ZJW311/monolith-blog/commit/3f33ae16fa2dbc4b390939b8b2b053750cf96313))
+
 ## [2.8.0](https://github.com/one-ea/Monolith/compare/v2.7.0...v2.8.0) (2026-09-27)
 
 
